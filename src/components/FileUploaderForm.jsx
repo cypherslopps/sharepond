@@ -57,7 +57,7 @@ const FileUploaderForm = () => {
     return (
         <form
             onSubmit={uploadData}
-            className='space-y-2.5'
+            className='space-y-2.5 w-1/2'
         >
             <div
                 role="group"

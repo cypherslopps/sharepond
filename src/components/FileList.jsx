@@ -13,7 +13,6 @@ const FileList = () => {
     try {
       setIsLoading(true);
       const { data, error } = await supabase.from('files').select('*');
-      console.log(data);  
 
       if (error) {
         return;
@@ -59,7 +58,7 @@ const FileList = () => {
   }
 
   return (
-    <section className="mt-16 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-5 pb-6">
+    <section className="w-[65%] mt-16 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4 lg:gap-5 pb-6">
       {isLoading && !files.length ? Array.from({ length: 8 }).map((_, idx) => (
         <FilesCategoryBoxLoader 
           key={idx}
