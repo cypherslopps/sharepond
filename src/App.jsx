@@ -1,36 +1,18 @@
 import React from 'react'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
-import AppLayout from './layouts/AppLayout';
-import Home from './pages/Home';
-import UploadFile from './pages/UploadFile';
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <AppLayout />,
-    children: [
-      {
-        index: true,
-        element: <Home />
-      },
-      {
-        path: "/upload",
-        element: <UploadFile />
-      }
-    ]
-  }
-])
-
-if (import.meta.hot) {
-  import.meta.hot.dispose(() => router.dispose());
-}
+import FileUploaderForm from "./components/FileUploaderForm";
+import FileList from "./components/FileList";
 
 const App = () => {
   return (
     <>
-      <RouterProvider router={router} />
       <ToastContainer />
+      
+      <main className='w-1/2 mx-auto py-20'>  
+        <h1 className='text-center mb-10 text-xl font-bold'>Upload File(s)</h1>
+        <FileUploaderForm />
+        {/* <FileList /> */}
+      </main>
     </>
   )
 }

@@ -13,8 +13,7 @@ import 'filepond/dist/filepond.min.css';
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 
-const FilepondUploader = ({ label, setImage }) => {
-    const [files, setFiles] = useState([]);
+const FilepondUploader = ({ label, setImages, files, setFiles })  =>{
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -38,12 +37,13 @@ const FilepondUploader = ({ label, setImage }) => {
             const filename = nanoid();
             const fileExt = file?.name.split(".").pop();
             const newFileName = `${filename}.${fileExt}`;
+            const bucketName = import.meta.env.VITE_SUPABASE_PROJECT_STORAGE_BUCKET_NAME;
             
             try {
                 progress(false, 0, file.size);
                 
                 const { data: supabaseResponseData, error: uploadError } = await supabase.storage
-                .from("files")
+                .from(bucketName)
                 .upload(
                     newFileName,
                     file
@@ -64,23 +64,22 @@ const FilepondUploader = ({ label, setImage }) => {
                 progress(true, file.size, file.size);
                 
                 const { data: publicUrlData } = await supabase.storage
-                    .from("files")
+                    .from(bucketName)
                     .getPublicUrl(supabaseResponseData?.path);
 
                 progress(true, 1, 1);
                 load(publicUrlData.publicUrl);
-
-                toast("Image successfully uploaded");
-
-                // Set image public url
-                setImage(publicUrlData.publicUrl);
+                
+                // Set images
+                setImages(publicUrlData.publicUrl);
             } catch (err) {
-                console.log(err?.message)
                 return {
                     abort: () => {
                         abort(); // Abort FilePond upload
                     },
                 };
+            } finally {
+                toast("Image successfully uploaded");
             }
         }
     }
@@ -100,10 +99,10 @@ const FilepondUploader = ({ label, setImage }) => {
             <FilePond
                 files={files}
                 onupdatefiles={setFiles}
-                allowMultiple={true}
-                maxFiles={5}
+                allowMultiple={false}
+                maxFiles={1}
                 server={{ process: handleServer }}
-                name="files"
+                name="file"
                 labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
                 className="filepond_wrap"
             />
