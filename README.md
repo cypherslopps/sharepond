@@ -1,2 +1,2 @@
 # Sharepond 
-File uploaded using Vitejs, Filepond and Supabase
+Real-time File Sharing app using Vitejs, Supabase and Filepond
