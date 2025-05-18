@@ -22,7 +22,7 @@
     "react-toastify": "^11.0.5",
     "sonner": "^2.0.3",
     "tailwindcss": "^4.1.4",
-    "tiny-skeleton-loader-react": "^1.2.0"
+    "tiny-skeleton-loader-react": "^1.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
