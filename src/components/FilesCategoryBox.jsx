@@ -1,19 +1,13 @@
 import React from 'react'
-import SkeletonLoader from 'tiny-skeleton-loader-react'
+import Skeleton from 'react-skeleton-loader';
 import { toast } from 'react-toastify'
 
 import supabase from "../services/supabase";
 
 export const FilesCategoryBoxLoader = () => {
+  // <Skeleton />
   return (
-    <SkeletonLoader
-      style={{
-        height: "208px",
-        borderRadius: "10px",
-        background: "#0D1022",
-        border: "1px solid black"
-      }}
-    />
+    <div></div>
   )
 }
 
