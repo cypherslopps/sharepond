@@ -1,13 +1,18 @@
 import React from 'react'
-import Skeleton from 'react-skeleton-loader';
 import { toast } from 'react-toastify'
 
 import supabase from "../services/supabase";
 
 export const FilesCategoryBoxLoader = () => {
-  // <Skeleton />
   return (
-    <div></div>
+    <div className="w-[65%] space-y-2 pb-6">
+      {Array.from({ length: 6 }).map((_, idx) => (
+        <div 
+          idx={idx} 
+          className="bg-box w-full h-52 rounded-lg shadow-lg shadow-black/20 border-2 border-black"
+        />
+      ))}
+    </div>
   )
 }
 
